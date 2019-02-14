@@ -1,9 +1,9 @@
-import valentineController from '.components/valentineController.js'
+import ValentineController from './components/valentineController.js'
 
 class App {
   constructor() {
     this.controllers = {
-      valCtlr: valentineController()
+      valCtlr: new ValentineController()
     }
   }
 }
