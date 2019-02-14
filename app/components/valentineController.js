@@ -4,14 +4,14 @@ let _vs = new ValentineService()
 
 function drawForm() {
   document.querySelector('#valForm').innerHTML = `
-    <form onsubmit="app.controllers.valCtlr.addValentine(event)">
-    <div class="form-group">
-      <input type="text" name="to" placeholder="To" required>
-      <input type="text" name="from" placeholder="From" required>
-      <textarea type="text" name="message" placeholder="Message" required/>
+  <div class="col-12 my-2">
+    <form onsubmit="app.controllers.valCtlr.addValentine(event)" class="form-group justify-content-center d-flex">
+      <input type="text" name="to" placeholder="To" class="form-control mx-2" required>
+      <input type="text" name="from" placeholder="From" class="form-control mx-2" required>
+      <input type="text" name="message" placeholder="Message" class="form-control mx-2" required />
       <button type="submit" class="btn btn-outline-danger btn-block">My Funny Valentine</button>
+    </form>
   </div>
-</form>
   `
 }
 
@@ -38,7 +38,7 @@ export default class ValentineController {
 
   addValentine(event) {
     event.preventDefault();
-    let form = event.targer
+    let form = event.target
     let newValentine = {
       to: form.to.value,
       from: form.from.value,
@@ -46,5 +46,9 @@ export default class ValentineController {
     }
     _vs.addValentine(newValentine)
     form.reset()
+  }
+
+  deleteVal(id) {
+    _vs.deleteVal(id)
   }
 }

@@ -1,17 +1,17 @@
-import Card from "../models/valentine.js"
+import Valentine from "../models/valentine.js"
 
 let _state = {
-  cards: [
-    new Card({ to: 'D$', from: 'Chrissy', message: 'Sup Dawg!' }),
-    new Card({ to: 'Mark', from: 'Chrissy', message: 'Sup Dawg!' }),
-    new Card({ to: 'Jake', from: 'Chrissy', message: 'Sup Dawg!' }),
-    new Card({ to: 'Zach', from: 'Chrissy', message: 'Wazzup Dawg!' }),
-    new Card({ to: 'Porter', from: 'Chrissy', message: 'Sup Dawg!' }),
+  valentines: [
+    new Valentine({ to: 'D$', from: 'Chrissy', message: 'Sup Dawg!' }),
+    new Valentine({ to: 'Mark', from: 'Chrissy', message: 'Sup Dawg!' }),
+    new Valentine({ to: 'Jake', from: 'Chrissy', message: 'Sup Dawg!' }),
+    new Valentine({ to: 'Zach', from: 'Chrissy', message: 'Wazzup Dawg!' }),
+    new Valentine({ to: 'Porter', from: 'Chrissy', message: 'Sup Dawg!' }),
   ]
 }
 
 let _subscribers = {
-  cards: []
+  valentines: []
 }
 
 function setState(data, val) {
@@ -26,15 +26,29 @@ export default class ValentineService {
   }
 
   get Valentines() {
-    return _state.cards.map(card => new Card(card))
+    return _state.valentines.map(valentine => new Valentine(valentine))
   }
 
   addSubscribers(data, fn) {
     _subscribers[data].push(fn)
   }
 
-  addValentine(data) {
-
+  addValentine(newValentine) {
+    let valentine = new Valentine(newValentine)
+    let updatedArr = this.Valentines
+    updatedArr.push(valentine)
+    setState('valentines', updatedArr)
   }
 
+  deleteVal(id) {
+    let updatedVal = this.Valentines
+    for (let i = 0; i < updatedVal.length; i++) {
+      let val = updatedVal[i]
+      if (val.id == id) {
+        updatedVal.splice(i, 1)
+        break;
+      }
+    }
+    setState('valentines', updatedVal)
+  }
 }
